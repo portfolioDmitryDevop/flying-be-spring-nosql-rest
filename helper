@@ -1,0 +1,17 @@
+/** Docker create image from jar **/
+1. In java proj Dockerfile
+FROM openjdk:17
+EXPOSE 8080
+ADD ./target/courses-service-0.0.1.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
+2. create run configuration maven. skip test. run package --idea
+2. In java project run as maven build
+Goals: clean install
+Skip test
+3. in file target rename jar to courses-service-0.0.1
+4. in gitBush in ./ project
+docker build -t flying-be-spring-sql-rest:0.0.1 .
+docker network create flying-network
+docker run --name mongodb -p27017:27017 --network flying-network -d mongo
+docker run --name flying-app -p8080:8080 --network flying-network -e JWT_SECRET=secret -d flying-be-spring-sql-rest:0.0.1
+docker logs flying-app

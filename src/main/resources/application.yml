@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:docker}
+  data:
+    mongodb:
+      database: fly
+      port: 27017
+
+logging:
+  level:
+    root: info
+    com.cybernite.flying: debug
+  file:
+    path: ./log
+
+app:
+  jwt:
+    exp:
+      period: ${EXT_PERIOD:3600000}
+    secret: ${SECRET:fm@ei@v%zus3lb6p31p0vp=+#-f=pw26}
